@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tc.mapper.MenuMapper" >
+  <resultMap id="BaseResultMap" type="com.tc.entity.Menu" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    
+    <result column="menu_Name" property="menuName" jdbcType="VARCHAR" />
+    <result column="icon" property="icon" jdbcType="VARCHAR" />
+    
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id,menu_Name,icon
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap">
+   use ${db}; select 
+    <include refid="Base_Column_List" />
+    from EMenu
+    where id = #{id}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+     use ${db}; delete from EMenu
+    where id = #{id}
+  </delete>
+  <insert id="insert" parameterType="com.tc.entity.Menu" >
+     use ${db};insert into EMenu (menu_Name)
+    values (#{menu.menuName,jdbcType=VARCHAR}
+      )
+  </insert>
+  
+  
+  <update id="updateByPrimaryKey" parameterType="com.tc.entity.Menu" >
+    update EMenu
+    set menu_Name = #{menu.menuName,jdbcType=VARCHAR}
+   
+    where id = #{menu.id,jdbcType=BIGINT}
+  </update>
+  
+  
+  <select id="selectAll" resultMap="BaseResultMap">
+   use ${db}; select 
+    <include refid="Base_Column_List" />
+    from EMenu
+  </select>
+  
+  
+</mapper>
